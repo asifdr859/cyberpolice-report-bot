@@ -9,6 +9,29 @@ The application operates as a distributed system:
 2. **Backend Application:** A Python server processes user inputs, performs format validations, and coordinates communications.
 3. **Database & Storage Layer:** Google Sheets serves as the database for report storage, accessed via a custom Google Apps Script endpoint. Screenshots are uploaded directly to Google Drive.
 
+```mermaid
+flowchart TD
+    subgraph Client Layer
+        Citizen[Citizen / Telegram Client]
+    end
+
+    subgraph Application Layer
+        Bot[Telegram Bot Handlers] <--> PyServer[Python Backend]
+    end
+
+    subgraph Data & Storage Layer
+        GAS[Google Apps Script API]
+        GSheets[(Google Sheets DB)]
+        GDrive[(Google Drive)]
+    end
+
+    Citizen <-->|Interactive Commands & Report Details| Bot
+    PyServer <-->|HTTP POST Requests| GAS
+    GAS <-->|Read / Write Reports| GSheets
+    PyServer -->|Save Screenshot Evidence| GDrive
+```
+
+
 ## Key Features
 
 * **Incident Reporting:** Guides users step-by-step to report various cyber fraud types, including UPI fraud, OTP fraud, loan scams, job scams, investment scams, and malicious websites.
