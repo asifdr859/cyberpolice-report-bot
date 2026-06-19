@@ -1,0 +1,301 @@
+CYBER FRAUD REPORTING BOT
+(TELEGRAM + PYTHON + GOOGLE SHEETS)
+
+====================================================
+FINAL ARCHITECTURE
+==================
+
+Citizen
+↓
+Telegram Bot
+↓
+Python Backend
+↓
+Google Apps Script Web API
+↓
+Google Sheets
+↓
+Police Dashboard
+
+====================================================
+GOOGLE SHEETS STRUCTURE
+=======================
+
+Sheet Name:
+Fraud_Reports
+
+Columns:
+
+A = Report ID
+B = Timestamp
+C = Telegram User ID
+D = Name
+E = Mobile Number
+F = Fraud Type
+G = UPI ID
+H = Website URL
+I = Fraud Description
+J = Amount Lost
+K = Incident Date
+L = City
+M = Evidence File URL
+N = Risk Score
+O = Duplicate Count
+P = Status
+
+Example:
+
+AMR-2026-001
+2026-06-18 15:30
+123456789
+Rahul
+9876543210
+UPI Fraud
+abc@paytm
+---------
+
+Fraud payment request
+5000
+18-06-2026
+Amroha
+https://drive.google...
+High
+5
+New
+
+====================================================
+TELEGRAM BOT FLOW
+=================
+
+/start
+
+Bot:
+
+Welcome to Amroha Police Cyber Fraud Reporting System
+
+[Report Fraud]
+[Check Status]
+[Awareness Tips]
+
+====================================================
+REPORT FRAUD
+============
+
+Step 1
+
+Select Fraud Type
+
+• UPI Fraud
+• OTP Fraud
+• Loan Fraud
+• Job Scam
+• Investment Scam
+• Website Scam
+• Other
+
+====================================================
+
+Step 2
+
+Enter UPI ID / Mobile Number / Website
+
+====================================================
+
+Step 3
+
+Describe Incident
+
+====================================================
+
+Step 4
+
+Enter Loss Amount
+
+====================================================
+
+Step 5
+
+Enter Date
+
+====================================================
+
+Step 6
+
+Upload Screenshot
+
+====================================================
+
+Step 7
+
+Submit
+
+====================================================
+
+# AUTOMATIC CHECKS
+
+UPI Validation
+
+Regex:
+
+[a-zA-Z0-9._-]+@[a-zA-Z]+
+
+Examples:
+
+abc@paytm
+test@ybl
+demo@okaxis
+
+====================================================
+
+URL Validation
+
+Check:
+
+http://
+https://
+
+====================================================
+
+Duplicate Detection
+
+Python fetches Google Sheet.
+
+If UPI already exists:
+
+abc@paytm found 12 times.
+
+Duplicate Count = 12
+
+====================================================
+
+# RISK SCORING
+
+Rules
+
+1 report
+Low
+
+5 reports
+Medium
+
+20 reports
+High
+
+50 reports
+Critical
+
+====================================================
+GOOGLE APPS SCRIPT API
+======================
+
+Functions:
+
+1. Add Report
+2. Search Report
+3. Count Duplicate UPI
+4. Update Status
+5. Dashboard Stats
+
+====================================================
+GOOGLE DRIVE STORAGE
+====================
+
+Telegram Screenshot
+↓
+Bot Downloads File
+↓
+Uploads to Google Drive
+↓
+Stores Drive Link in Sheet
+
+====================================================
+POLICE DASHBOARD
+================
+
+Google Looker Studio
+
+Widgets:
+
+Total Reports
+
+Reports Today
+
+Top Reported UPI IDs
+
+Top Fraud Websites
+
+Most Common Scam Type
+
+High Risk Cases
+
+====================================================
+GOOGLE SHEETS TABS
+==================
+
+TAB 1
+
+Fraud_Reports
+
+TAB 2
+
+Fraud_UPI_DB
+
+Columns
+
+UPI
+Reports
+Risk
+
+TAB 3
+
+Fraud_Websites
+
+Domain
+Reports
+Risk
+
+TAB 4
+
+Dashboard_Data
+
+Daily Reports
+Weekly Reports
+Monthly Reports
+
+====================================================
+PROJECT FOLDER
+==============
+
+fraud_bot/
+
+├── bot.py
+├── config.py
+├── handlers/
+│
+├── services/
+│   ├── sheets.py
+│   ├── drive.py
+│   ├── validator.py
+│
+├── utils/
+│   ├── report_id.py
+│
+├── credentials.json
+│
+└── requirements.txt
+
+====================================================
+PHASE 2 FEATURES
+================
+
+OCR Screenshot Analysis
+
+AI Scam Classification
+
+Hindi Support
+
+Auto PDF Report
+
+Email Alert to Police
+
+api key = <your_telegram_bot_token>
